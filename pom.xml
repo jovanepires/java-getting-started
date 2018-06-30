@@ -79,6 +79,7 @@
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <version>4.0-beta3</version>
     </dependency>
   </dependencies>
 
