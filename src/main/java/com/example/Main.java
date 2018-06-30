@@ -56,7 +56,7 @@ public class Main {
   @RequestMapping("/send")
   String send(@RequestParam("comment") String comment) {
     HttpClient httpclient = HttpClients.createDefault();
-
+    System.out.println(comment);
     try
     {
         URIBuilder builder = new URIBuilder("https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c9");
@@ -69,8 +69,8 @@ public class Main {
 
 
         // Request body
-        String body = "{\"documents\": [{\"language\": \"pt\",\"id\": \"1\",\"text\": \"#comment\"},]}";
-        StringEntity reqEntity = new StringEntity(body.replace("#comment", comment));
+        String body = "{\"documents\": [{\"language\": \"pt\",\"id\": \"1\",\"text\": \""+ comment +"\"},]}";
+        StringEntity reqEntity = new StringEntity(body);
         request.setEntity(reqEntity);
 
         HttpResponse response = httpclient.execute(request);
@@ -88,6 +88,8 @@ public class Main {
 
                 if (d.getScore() != null) {
                     Double score = d.getScore();
+
+                    System.out.println(score);
 
                     if (score < 0.40) {
                       return "ruim.html";
