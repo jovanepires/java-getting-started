@@ -59,14 +59,12 @@ public class Main {
     System.out.println(comment);
     try
     {
-        URIBuilder builder = new URIBuilder("https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c9");
-
+        URIBuilder builder = new URIBuilder("https://brazilsouth.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment");
 
         URI uri = builder.build();
         HttpPost request = new HttpPost(uri);
         request.setHeader("Content-Type", "application/json");
-        request.setHeader("Ocp-Apim-Subscription-Key", "9958672d1ab346b2ac4c61fb3be6b36c");
-
+        request.setHeader("Ocp-Apim-Subscription-Key", "110092884fcf4d1296f72458947ced5e");
 
         // Request body
         StringEntity reqEntity = new StringEntity("{\"documents\": [{\"language\": \"pt\",\"id\": \"1\",\"text\": \"" + comment +"\"}]}");
