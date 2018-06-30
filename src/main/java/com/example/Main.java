@@ -69,7 +69,7 @@ public class Main {
 
 
         // Request body
-        String body = "{\"documents\": [{\"language\": \"pt\",\"id\": \"1\",\"text\": \""+ comment +"\"},]}";
+        String body = "{\"documents\": [{\"language\": \"pt\",\"id\": \"1\",\"text\": \""+ comment +"\"}]}";
         StringEntity reqEntity = new StringEntity(body);
         request.setEntity(reqEntity);
 
