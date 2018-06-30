@@ -89,11 +89,18 @@ public class Main {
                 if (d.getScore() != null) {
                     Double score = d.getScore();
 
-                    System.out.println(score);
+                    if (score < 0.40) {
+                      return "ruim.html";
+                    }
 
-                    //TODO: Implementar decisão por scores
+                    if (score < 0.70) {
+                      return "medio.html";
+                    }
+
+                    if (score <= 1.0) {
+                      return "otimo.html";
+                    }
                 }
-
             }
         }
     }
