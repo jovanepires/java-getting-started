@@ -45,7 +45,7 @@ public class Main {
 
   @RequestMapping("/")
   String index() {
-    return "index";
+    return "formulario.html";
   }
 
   @RequestMapping("/form")
@@ -54,7 +54,7 @@ public class Main {
   }
 
   @RequestMapping("/send")
-  String send(@RequestParam("comment") String comment) {
+  String send(@RequestParam("comment") String comment, HttpSession session) {
     HttpClient httpclient = HttpClients.createDefault();
     System.out.println(comment);
     try
@@ -85,7 +85,7 @@ public class Main {
 
                 if (d.getScore() != null) {
                     Double score = d.getScore();
-
+                    session.setAttribute("score", score);
                     System.out.println(score);
 
                     if (score < 0.40) {

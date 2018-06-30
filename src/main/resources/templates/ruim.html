@@ -9,7 +9,9 @@
     <body>
         <div id="mensagem">
             <h1>Ruim</h1>
+            <p th:text="${session.score}" th:unless="${session == null}"></p>
             <p>Desculpa! Volte!</p>
         </div>
+        <p><a href="/"><< Voltar para o formulário</a></p>
     </body>
 </html>

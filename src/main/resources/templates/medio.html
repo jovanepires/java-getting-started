@@ -9,7 +9,9 @@
     <body>
         <div id="mensagem">
             <h1>Médio</h1>
+            <p th:text="${session.score}" th:unless="${session == null}"></p>
             <p>Pedimos desculpas pelo inconveniente e esperamos você em breve</p>
         </div>
+        <p><a href="/"><< Voltar para o formulário</a></p>
     </body>
 </html>
