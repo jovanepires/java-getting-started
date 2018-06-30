@@ -53,6 +53,21 @@ public class Main {
     return "index";
   }
 
+  @RequestMapping("/otimo")
+  String index() {
+    return "otimo.html";
+  }
+
+  @RequestMapping("/medio")
+  String index() {
+    return "medio.html";
+  }
+
+  @RequestMapping("/ruim")
+  String index() {
+    return "ruim.html";
+  }
+
   @RequestMapping("/db")
   String db(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
