@@ -69,8 +69,7 @@ public class Main {
 
 
         // Request body
-        String body = "{\"documents\": [{\"language\": \"pt\",\"id\": \"1\",\"text\": \""+ comment +"\"}]}";
-        StringEntity reqEntity = new StringEntity(body);
+        StringEntity reqEntity = new StringEntity("{\"documents\": [{\"language\": \"pt\",\"id\": \"1\",\"text\": \"" + comment +"\"}]}");
         request.setEntity(reqEntity);
 
         HttpResponse response = httpclient.execute(request);
