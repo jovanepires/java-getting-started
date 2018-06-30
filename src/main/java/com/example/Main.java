@@ -34,15 +34,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
 
+import java.net.URI;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
 @Controller
 @SpringBootApplication
 public class Main {
-
-  @Value("${spring.datasource.url}")
-  private String dbUrl;
-
-  @Autowired
-  private DataSource dataSource;
 
   public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
@@ -60,7 +63,37 @@ public class Main {
 
   @RequestMapping("/send")
   String send(String comment) {
-    
+    HttpClient httpclient = HttpClients.createDefault();
+
+    try
+    {
+        URIBuilder builder = new URIBuilder("https://westus.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c9");
+
+
+        URI uri = builder.build();
+        HttpPost request = new HttpPost(uri);
+        request.setHeader("Content-Type", "application/json");
+        request.setHeader("Ocp-Apim-Subscription-Key", "9958672d1ab346b2ac4c61fb3be6b36c");
+
+
+        // Request body
+        String body = "{\"documents\": [{\"language\": \"br\",\"id\": \"1\",\"text\": \"#comment\"},]}";
+        StringEntity reqEntity = new StringEntity(body.Replace("#comment", comment));
+        request.setEntity(reqEntity);
+
+        HttpResponse response = httpclient.execute(request);
+        HttpEntity entity = response.getEntity();
+
+        if (entity != null) 
+        {
+            System.out.println(EntityUtils.toString(entity));
+        }
+    }
+    catch (Exception e)
+    {
+        System.out.println(e.getMessage());
+    }
+
     return "formulario.html";
   }
 
@@ -77,17 +110,6 @@ public class Main {
   @RequestMapping("/ruim")
   String ruim() {
     return "ruim.html";
-  }
-
-  @Bean
-  public DataSource dataSource() throws SQLException {
-    if (dbUrl == null || dbUrl.isEmpty()) {
-      return new HikariDataSource();
-    } else {
-      HikariConfig config = new HikariConfig();
-      config.setJdbcUrl(dbUrl);
-      return new HikariDataSource(config);
-    }
   }
 
 }
