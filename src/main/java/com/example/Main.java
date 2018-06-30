@@ -70,7 +70,7 @@ public class Main {
 
         // Request body
         String body = "{\"documents\": [{\"language\": \"pt\",\"id\": \"1\",\"text\": \"#comment\"},]}";
-        StringEntity reqEntity = new StringEntity(body.Replace("#comment", comment));
+        StringEntity reqEntity = new StringEntity(body.replace("#comment", comment));
         request.setEntity(reqEntity);
 
         HttpResponse response = httpclient.execute(request);
