@@ -53,6 +53,17 @@ public class Main {
     return "index";
   }
 
+  @RequestMapping("/form")
+  String form() {
+    return "formulario.html";
+  }
+
+  @RequestMapping("/send")
+  String send(String comment) {
+    
+    return "formulario.html";
+  }
+
   @RequestMapping("/otimo")
   String otimo() {
     return "otimo.html";
