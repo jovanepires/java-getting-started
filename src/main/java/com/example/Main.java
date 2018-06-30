@@ -62,7 +62,7 @@ public class Main {
   }
 
   @RequestMapping("/send")
-  String send(String comment) {
+  String send(@RequestParam("comment") String comment) {
     HttpClient httpclient = HttpClients.createDefault();
 
     try
@@ -77,7 +77,7 @@ public class Main {
 
 
         // Request body
-        String body = "{\"documents\": [{\"language\": \"br\",\"id\": \"1\",\"text\": \"#comment\"},]}";
+        String body = "{\"documents\": [{\"language\": \"pt\",\"id\": \"1\",\"text\": \"#comment\"},]}";
         StringEntity reqEntity = new StringEntity(body.Replace("#comment", comment));
         request.setEntity(reqEntity);
 
@@ -86,7 +86,23 @@ public class Main {
 
         if (entity != null) 
         {
-            System.out.println(EntityUtils.toString(entity));
+            String json = EntityUtils.toString(entity);
+
+            ObjectMapper mapper = new ObjectMapper();
+            MainDTO obj = mapper.readValue(json, MainDTO.class);
+
+            if (obj.getDocuments() != null && obj.getDocuments().size() > 0) {
+                DocumentDTO d = obj.getDocuments().get(0);
+
+                if (d.getScore() != null) {
+                    Double score = d.getScore();
+
+                    System.out.println(score);
+
+                    //TODO: Implementar decisão por scores
+                }
+
+            }
         }
     }
     catch (Exception e)
